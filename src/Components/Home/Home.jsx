@@ -41,7 +41,7 @@ export default function Home({setName}) {
         <div className={styles.contain}>
             <div className={styles.con}>
                 <Link to="/">
-                    <span className={styles.home}>Home</span>
+                    <span className={styles.home}>Go Back</span>
                 </Link>
                 <Link to={"/new"}>
                     <span className={styles.create}>Create Videogame</span>
