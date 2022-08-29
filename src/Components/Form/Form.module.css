@@ -1,0 +1,177 @@
+* {
+	box-sizing: border-box;
+}
+ 
+/*BACKGROUND*/
+
+.container {
+	padding: 10px;
+	border: 1px solid #000;
+	margin: auto;
+	background-color: #A9CEF4;
+	min-height: 120vh;
+	background: url("../../Images/4277135.webp") no-repeat center center fixed;
+	background-size: cover
+}
+
+/*BACK-FORM*/
+
+.form {
+    width: 625px;
+    padding: 10px;
+    border-radius: 10px;
+    margin: auto;
+    background-color: rgb(101, 206, 241);
+}
+
+/*LABEL AND INPUT*/
+
+.label {
+	display: block;
+	font-weight: bold;
+}
+
+.input {
+	padding: 5px;
+	width: 100%;
+	margin: 16px 0;
+}
+
+.textarea {
+	width: 100%;
+	height: 100px;
+	border: 1px solid #f6f6f6;
+	border-radius: 3px;
+	background-color: #f6f6f6;
+	margin: 8px 0;
+	/*resize: vertical | horizontal | none | both*/
+	resize: none;
+	display: block;
+}
+
+/*SUBMIT AND BACK*/
+
+
+.submit {
+	width: 100%;
+	padding: 8px 16px;
+	margin-top: 75px;
+	border: 1px solid rgb(249, 80, 232);
+	border-radius: 5px;
+	display: block;
+	color: #fff;
+}
+
+.submit:active{
+	background-color: rgb(164, 0, 245);
+}
+
+.submit:hover {
+	cursor: pointer;
+	box-shadow:  rgba(197, 80, 243, 0.789) 5px 5px, rgba(166, 46, 240, 0.674) 5px 5px;
+}
+
+.back {
+	position: relative;
+	width: 15%;
+	padding: 8px 16px;
+	margin-bottom: 20px;
+	border: 1px solid rgb(249, 80, 232);
+	border-radius: 5px;
+	color: #fff;
+	background-color: #000;
+	cursor: pointer;
+	text-decoration: none;
+}
+
+.back:hover {
+	cursor: pointer;
+	box-shadow:  rgba(6, 212, 243, 0.789) 5px 5px, rgba(46, 204, 240, 0.674) 5px 5px;
+}
+
+/*SELECT GENRE AND PLATFORM*/
+
+/*estilo para el select*/
+/*asi eliminamos lo que contiene por defecto el estilo el select*/
+.select {
+	appearance: none;
+}
+
+/* Eliminamos la fecha que por defecto aparece en el desplegable */
+.select::-ms-expand {
+	display: none;
+}
+
+.select {
+
+	width: 100%;
+	cursor: pointer;
+	padding: 7px 10px;
+	height: 42px;
+	outline: 0;
+	border: 0;
+	border-radius: 0;
+	background: #f0f0f0;
+	color: #7b7b7b;
+	font-size: 1em;
+	color: #999;
+	border-radius: 12px;
+	transition: all 0.25s ease;
+}
+
+.select:hover {
+	background: #B1E8CD;
+}
+
+/* 
+Creamos la fecha que aparece a la izquierda del select.
+Realmente este elemento es un cuadrado que sólo tienen
+dos bordes con color y que giramos con transform: rotate(-45deg);
+*/
+
+/*LO QUE SELECCIONAMOS DE GENRES AND PLATFORM*/
+
+.divContain {
+    display: grid;
+    grid-template-columns: 200px 200px 200px;
+    margin-top: 22px;
+    padding-left: 44px;
+    padding-top: 10px;
+    /* margin-right: 63px; */
+    justify-items: stretch;
+}
+
+.divInfo{
+    max-width: 197px;
+    width: px;
+    margin: 11px;
+    background: rgb(208, 6, 181);
+    position: relative;
+	border-radius: 10px;
+    right: 40px;
+}
+
+.p {
+	color: rgb(255, 255, 255);
+    /* display: block; */
+    /* text-align: center; */
+    padding: 10px 23px;
+    margin: 14px -55px;
+}
+
+.buttonP {
+	cursor: pointer;
+    position: relative;
+    /* left: 15px; */
+    bottom: 22px;
+    /* float: right; */
+    margin: auto -5px;
+	border-radius: 10px;
+	border: solid ;
+}
+
+/*LETTERS ERROR*/
+
+.error{
+	color: red;
+}

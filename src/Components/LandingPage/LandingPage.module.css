@@ -1,0 +1,164 @@
+
+.landingContainer {
+    display: flex;
+    justify-content: center;
+    background-image: url("../../Images/1_Vq0sQ79QIZV6V1R-t7qtmw.gif");
+    background-size: 100% 100%;
+    height: 100vh;
+    background-repeat: no-repeat;
+}
+
+
+.landingTitle {
+    margin: 10px;
+    font-size:32px;
+    text-align:center ;
+    color: white;
+    background: rgba(255, 21, 0, 0.838);
+    border-radius: 12px;
+    position: relative;
+    right: 150px;
+}
+
+.landingTitle2 {
+    width:500px;
+    margin: 10px;
+    font-size:25px;
+    text-align:center ;
+    color: white;
+    background: rgba(255, 21, 0, 0.838);
+    border-radius: 12px;
+    position: relative;
+    right: 150px;
+}
+
+.titleAndbtn {
+    margin: 100px;
+}
+
+.button {
+    --glow-color: rgb(80, 209, 226);
+    --glow-spread-color: rgba(65, 205, 194, 0.781);
+    --enhanced-glow-color: rgb(24, 118, 144);
+    --btn-color: rgb(4, 102, 121);
+    border: .25em solid var(--glow-color);
+    padding: 1em 3em;
+    color: var(--glow-color);
+    font-size: 15px;
+    font-weight: bold;
+    background-color: var(--btn-color);
+    border-radius: 1em;
+    outline: none;
+    box-shadow: 0 0 1em .25em var(--glow-color),
+           0 0 4em 1em var(--glow-spread-color),
+           inset 0 0 .75em .25em var(--glow-color);
+    text-shadow: 0 0 .5em var(--glow-color);
+    position: relative;
+    top: 110px;
+    right: 150px;
+    transition: all 0.3s;
+    cursor: pointer;
+   }
+   
+   .button::after {
+    pointer-events: none;
+    content: "";
+    position: absolute;
+    top: 120%;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background-color: var(--glow-spread-color);
+    filter: blur(2em);
+    opacity: .7;
+    transform: perspective(1.5em) rotateX(35deg) scale(1, .6);
+   }
+   
+   .button:hover {
+    color: var(--btn-color);
+    background-color: var(--glow-color);
+    box-shadow: 0 0 1em .25em var(--glow-color),
+           0 0 4em 2em var(--glow-spread-color),
+           inset 0 0 .75em .25em var(--glow-color);
+   }
+   
+   button:active {
+    box-shadow: 0 0 0.6em .25em var(--glow-color),
+           0 0 2.5em 2em var(--glow-spread-color),
+           inset 0 0 .5em .25em var(--glow-color);
+   }
+
+.Text {
+    color: black;
+    font-size: large;
+    font-weight: 100;
+    text-shadow: 25px 10px 25px rgba(255, 255, 255, 0.75), 25px 10px 25px rgba(255, 255, 255, 0.75);
+}
+
+
+.WhatsApp{
+    cursor: pointer;
+    margin: 15px;
+    border-radius: 50px;
+    border-color: transparent;
+    background-image: url("../../Images/icons8-whatsapp.gif");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 50px;
+    width: 50px;
+    position: relative;
+    top: 20px;
+    left: 40px;
+}
+.WhatsApp:hover{
+    height: 95px;
+    width: 95px;
+    border-radius: 100px;
+    transition: all 1s ease;
+}
+
+.Git{
+    margin: 15px;
+    cursor: pointer;
+    border-radius: 50px;
+    border-color: black;
+    background-image: url("../../Images/icons8-github-50.png");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 50px;
+    width: 50px;
+    position: relative;
+    top: 20px;
+    left: 40px;
+
+}
+.Git:hover{
+    height: 95px;
+    width: 95px;
+    border-radius: 100px;
+    transition: all 1s ease;
+}
+
+.LinkedIn{
+    margin: 25px;
+    cursor: pointer;
+    border-radius: 50px;
+    border-color: transparent;
+    background-image: url("../../Images/0d965c639dad997285aa1e434c0bc7d5.gif");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 50px;
+    width: 50px;
+    position: relative;
+    top: 20px;
+    left: 40px;
+}
+.LinkedIn:hover{
+    height: 95px;
+    width: 95px;
+    border-radius: 100px;
+    transition: all 1s ease-in-out;
+}

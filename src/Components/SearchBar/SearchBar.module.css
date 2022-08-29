@@ -1,0 +1,37 @@
+.input {
+    font-size: 15px;
+    line-height: 1;
+    border: none;
+    padding: 10px;
+    border-radius: 1rem;
+    box-shadow: 20px 20px 60px 5px rgb(131, 237, 232), -20px -20px 60px rgb(131, 237, 232);
+    transition: 0.3s;
+}
+
+.input::placeholder {
+    color: #e16868;
+}
+
+.button{
+    appearance: none;
+    background-color: #FAFBFC;
+    border: 1px solid rgba(27, 31, 35, 0.15);
+    border-radius: 1rem;
+    box-sizing: border-box;
+    color: #24292E;
+    cursor: pointer;
+    display: inline-block;
+    font-family: -apple-system, system-ui, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 16px;
+    list-style: none;
+    padding: 6px 16px;
+    position: relative;
+    transition: all 500ms;
+    padding: 10px;
+}
+
+.button:hover{
+    box-shadow: 20px 20px 60px 5px rgb(131, 237, 232), -20px -20px 60px rgb(131, 237, 232);
+}

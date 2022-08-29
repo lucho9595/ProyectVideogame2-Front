@@ -1,0 +1,10 @@
+.background{
+    bottom: 100px;
+    justify-content: center;
+    justify-items: center;
+    width:1030px;
+    align-items: center;
+    text-align: center;
+    position: relative;
+    margin-bottom: 50px
+}

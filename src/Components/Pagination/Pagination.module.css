@@ -1,0 +1,41 @@
+.paginationContainer {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    height: 150px;
+    margin: 0px;
+    padding: 0px;
+    position: relative;
+    top: 35px;
+    left:178px;
+}
+
+.paginationList {
+    margin: 5px;
+    padding: 5px;
+    list-style: none;
+}
+
+.paginationBtn {
+    transition: all 300ms;
+    height: 50px;
+    width: 50px;
+    border-radius: 5px;
+    border-color: aliceblue;
+    background-color: rgb(10, 72, 101);
+    font-size: 20px;
+    color: rgb(255, 255, 255);
+    cursor: pointer;
+}
+
+.paginationBtn:hover {
+    transform: scale(1.1);
+    box-shadow:  rgba(6, 212, 243, 0.789) 5px 5px, rgba(46, 204, 240, 0.674) 5px 5px;
+
+}
+
+.paginationBtn:focus {
+    background-color:  #C77DFF;
+    transform: scale(1.1);
+
+}

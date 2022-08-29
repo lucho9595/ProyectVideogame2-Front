@@ -1,0 +1,55 @@
+.img {
+  border-radius: 50px 20px;
+  width: 200px;
+  margin-left: 80px;
+  margin-right: 80px;
+  margin-bottom: 50px;
+  margin: 15px;
+}
+
+.contain {
+  width: 250px;
+  /* height: 450px; */
+  margin-left: 143px;
+  margin-right: 45px;
+  margin-bottom: 50px;
+  background: rgb(36, 231, 238);
+  border-radius: 10px;
+  border-bottom: 5px solid blueviolet;
+  border-right: 5px solid blueviolet;
+  border-top: 5px solid white;
+  border-left: 5px solid white;
+  transition-duration: 1s;
+  transition-property: border-top, border-left, border-bottom, border-right, box-shadow;
+}
+
+.contain:hover{
+  border-top: 5px solid blueviolet;
+  border-left: 5px solid rgba(137, 43, 226, 0.653);
+  border-bottom: 5px solid rgb(255, 116, 250);
+  border-right: 5px solid rgb(218, 30, 218);
+  box-shadow: rgba(10, 222, 255, 0.944) 5px 5px, rgba(9, 173, 182, 0.82) 10px 10px, rgba(46, 204, 240, 0.566) 15px 15px, rgba(46, 214, 240, 0.253) 20px 20px, rgba(46, 204, 240, 0.056) 25px 25px;
+}
+
+.h3{
+  text-align: center;
+}
+
+.details{
+  position: relative;
+  /* top: 10px; */
+  cursor: pointer;
+  margin: 1rem 5px 5px 5px;
+  border-radius: 10px;
+  height: 1.8rem;
+  width: 10rem;
+  color: aliceblue;
+  background-color: rgba(236, 21, 207, 0.927);
+  transition: all 500ms;}
+
+.details:hover {
+  color: white;
+  background-color: rgb(238, 103, 238);
+  border: 1px solid white;
+  box-shadow: rgba(67, 71, 85, 0.27) 0px 0px 0.25em, rgba(90, 125, 188, 0.05) 0px 0.25em 1em;
+ }

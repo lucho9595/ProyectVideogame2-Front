@@ -1,0 +1,26 @@
+.select{
+    height: 3rem;
+    width: 10rem;
+    border-radius: 5px;
+    padding-left: 5px;
+    background-color:  #C77DFF;
+    border-radius: 10px;
+    top: 90px;
+    cursor: pointer;
+  }
+  
+  .select::-ms-expand {
+    display: none;
+  }
+  
+  .select:hover {
+    border-color: lightgreen;
+  }
+  
+  .select:focus {
+    border-color: #aaa;
+    box-shadow: 0 0 1px 3px rgba(59, 153, 252, .7);
+    box-shadow: 0 0 0 3px -moz-mac-focusring;
+    color: #222;
+    outline: none;
+  }
