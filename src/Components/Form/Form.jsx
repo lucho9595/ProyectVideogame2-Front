@@ -220,6 +220,7 @@ export default function Created() {
                         <div className={styles.content}>
                             <label className={styles.label}>Genre:</label>
                             <select className={styles.select} onChange={(e) => handleSelectG(e)}>
+                                <option value="all" disable>All Genre</option>
                                 {genres?.map((g, id) => (
                                     <option name={g.name} key={id}>{g.name}</option>
                                 ))}
@@ -237,6 +238,7 @@ export default function Created() {
                         <div>
                             <label className={styles.label}>Platform:</label>
                             <select className={styles.select} onChange={(e) => handleSelectP(e)}>
+                            <option value="all" disable>All Platform</option>
                                 {platform?.map((p, id) => (
                                     <option name={p.name} key={id}>{p.name}</option>
                                 ))}
