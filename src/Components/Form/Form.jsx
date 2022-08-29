@@ -11,7 +11,6 @@ export default function Created() {
     const allGames = useSelector((state) => state.videogames)
     const genres = useSelector((state) => state.genres);
     const platform = useSelector((state) => state.platform)
-    console.log(platform)
     const [error, setError] = useState({});
     const [input, setInput] = useState({
         name: "",
