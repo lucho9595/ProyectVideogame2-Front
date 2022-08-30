@@ -202,7 +202,7 @@ export default function Created() {
                                 min="0"
                                 max="5"
                                 className={styles.input}
-                            />{input.rating}
+                            /> <p className={styles.label}>{input.rating}</p> 
                             {error.rating && (<p className={styles.error}>❌{error.rating}</p>)}
                         </div>
                         <div>
