@@ -42,9 +42,9 @@ export default function Created() {
         if (!Date.parse(input.release)) { errors.release = "Date of release is required"; }
         if (!input.rating) { errors.rating = "Rating is required"; }
         if (input.rating > 5 || input.rating < 1) { errors.rating = "Rating must range between 0 and 5"; }
-        if (!/^(https?|ftp):\/\/(((([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-f]{2})|[!\$&'\(\)\*\+,;=]|:)*@)?(((\d|[1-9]\d|1\d\d|2[0-4]\d|25[0-5])\.(\d|[1-9]\d|1\d\d|2[0-4]\d|25[0-5])\.(\d|[1-9]\d|1\d\d|2[0-4]\d|25[0-5])\.(\d|[1-9]\d|1\d\d|2[0-4]\d|25[0-5]))|((([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])*([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])))\.)+(([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])*([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])))\.?)(:\d*)?)(\/((([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-f]{2})|[!\$&'\(\)\*\+,;=]|:|@)+(\/(([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-f]{2})|[!\$&'\(\)\*\+,;=]|:|@)*)*)?)?(\?((([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-f]{2})|[!\$&'\(\)\*\+,;=]|:|@)|[\uE000-\uF8FF]|\/|\?)*)?(\#((([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-f]{2})|[!\$&'\(\)\*\+,;=]|:|@)|\/|\?)*)?$/gi.test(input.image)) { errors.image = "The url is not valid"; }
-        if (!input.genres.length) { errors.genres = "Select at least a one genres "; }
-        if (!input.platform.length) { errors.platform = " Select at least a one platform"; }
+        if (!/^(http(s?):)([/|.|\w|\s|-])*\.(?:jpg|gif|png)/gi.test(input.image)) { errors.image = "The url is not valid"; }
+        if (!input.genres.length) { errors.genres = "Select at least a one or five genres "; }
+        if (!input.platform.length) { errors.platform = " Select at least a one or five platform"; }
         return errors;
     }
 
@@ -62,30 +62,53 @@ export default function Created() {
     };
 
     function handleSelectG(e) {
-        setInput({
-            ...input,
-            genres: [...new Set([...input.genres, e.target.value])],
-        })
-        setError(
-            validation({
-                ...input,
-                genres: [...input.genres, e.target.value],
-            })
-        )
-    };
-    function handleSelectP(e) {
-        setInput({
-            ...input,
-            platform: [...new Set([...input.platform, e.target.value])]
-        })
-        setError(
-            validation({
-                ...input,
-                platform: [...input.platform, e.target.value]
-            })
-        )
+        if (input.genres.length === 5) {
+            alert("You must put maximum 5 types")
+        } else {
 
-    }
+            setInput({
+                ...input,
+                genres: [...new Set([...input.genres, e.target.value])],
+
+            })
+            setError(
+                validation({
+                    ...input,
+                    genres: [...input.genres, e.target.value],
+                })
+            )
+        }
+    };
+
+    // otra forma que seleccione de a uno
+    // if (Object.values(input.genres).includes(e.target.value)) {
+    //     alert("The genre has already been selected");
+    // } else {
+    //     setInput({
+    //     ...input,
+    //     genres: [...input.genres, e.target.value]
+    //     ,
+    //     }); 
+    // }
+    // };
+
+    function handleSelectP(e) {
+        if (input.platform.length === 5) {
+            alert("You must put maximum 5 types")
+        } else {
+            setInput({
+                ...input,
+                platform: [...new Set([...input.platform, e.target.value])]
+            });
+
+            setError(
+                validation({
+                    ...input,
+                    platform: [...input.platform, e.target.value]
+                })
+            );
+        }
+    };
 
     function handleDelete(e, el) {
         e.preventDefault();
@@ -185,6 +208,8 @@ export default function Created() {
                             <label className={styles.label}>Release:</label>
                             <input
                                 type="date"
+                                min='1980-03-01'
+                                max='2023-01-03'
                                 value={input.release}
                                 name="release"
                                 onChange={handleChange}
@@ -199,10 +224,11 @@ export default function Created() {
                                 value={input.rating || 0}
                                 name="rating"
                                 onChange={handleChange}
+                                step="0.1"
                                 min="0"
                                 max="5"
                                 className={styles.input}
-                            /> <p className={styles.label}>{input.rating}</p> 
+                            /><p className={styles.label}>{input.rating}</p> 
                             {error.rating && (<p className={styles.error}>❌{error.rating}</p>)}
                         </div>
                         <div>
@@ -222,7 +248,7 @@ export default function Created() {
                             <select className={styles.select} onChange={(e) => handleSelectG(e)}>
                                 <option value="all" disable>All Genre</option>
                                 {genres?.map((g, id) => (
-                                    <option name={g.name} key={id}>{g.name}</option>
+                                    <option name={g.name} key={id} value={g.name}>{g.name}</option>
                                 ))}
                             </select>
                             {error.genres && (<p className={styles.error}> ❌{error.genres}</p>)}
@@ -238,9 +264,9 @@ export default function Created() {
                         <div>
                             <label className={styles.label}>Platform:</label>
                             <select className={styles.select} onChange={(e) => handleSelectP(e)}>
-                            <option value="all" disable>All Platform</option>
+                                <option value="all" disable>All Platform</option>
                                 {platform?.map((p, id) => (
-                                    <option name={p.name} key={id}>{p.name}</option>
+                                    <option name={p.name} key={id} value={p.name}>{p.name}</option>
                                 ))}
                             </select>
                             {error.platform && (<p className={styles.error}> ❌{error.platform}</p>)}
