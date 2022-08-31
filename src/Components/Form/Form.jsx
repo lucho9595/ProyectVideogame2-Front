@@ -2,7 +2,7 @@ import React from "react";
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
 import { Link, useHistory } from 'react-router-dom';
-import { getGenres, getPlatform, createdGame } from '../../Redux/Actions.js';
+import { getGenres, createdGame, getVideogames } from '../../Redux/Actions.js'; //getPlatform
 import styles from "./Form.module.css";
 
 export default function Created() {
@@ -10,7 +10,7 @@ export default function Created() {
     const history = useHistory();
     const allGames = useSelector((state) => state.videogames)
     const genres = useSelector((state) => state.genres);
-    const platform = useSelector((state) => state.platform)
+    // const platform = useSelector((state) => state.platform)
     const [error, setError] = useState({});
     const [input, setInput] = useState({
         name: "",
@@ -24,7 +24,8 @@ export default function Created() {
 
     useEffect(() => {
         dispatch(getGenres())
-        dispatch(getPlatform())
+        dispatch(getVideogames())
+        // dispatch(getPlatform())
     }, [dispatch])
 
     //Aca realizamos la validacion:
@@ -35,14 +36,14 @@ export default function Created() {
             errors.name = "That Games exists";
         }
         if (!/^[a-z\s]+$/.test(input.name)) { errors.name = "Only lower-case letters are accepted"; }
-        if (input.name.length > 80) { errors.name = "Only Eighty characters"; }
+        if (input.name.length > 15) { errors.name = "Only fifteen characters"; }
         if (input.name === " ") { errors.name = "The first character is not space-bar"; }
         if (!input.name) { errors.name = "Name required"; }
         if (input.description.length < 180 || input.description.length > 1500) { errors.description = "Minium 180 characters"; }
         if (!Date.parse(input.release)) { errors.release = "Date of release is required"; }
         if (!input.rating) { errors.rating = "Rating is required"; }
-        if (input.rating > 5 || input.rating < 1) { errors.rating = "Rating must range between 0 and 5"; }
-        if (!/^(http(s?):)([/|.|\w|\s|-])*\.(?:jpg|gif|png)/gi.test(input.image)) { errors.image = "The url is not valid"; }
+        if (input.rating > 5 || input.rating < 0.1) { errors.rating = "Rating must range between 0 and 5"; }
+        if (!/^(https:\/\/)([^\s(["<,>/]*)(\/)[^\s[",><]*(.png|.jpg|.jpeg)(\?[^\s[",><]*)?/gi.test(input.image)) { errors.image = "The url is not valid"; }
         if (!input.genres.length) { errors.genres = "Select at least a one or five genres "; }
         if (!input.platform.length) { errors.platform = " Select at least a one or five platform"; }
         return errors;
@@ -128,6 +129,15 @@ export default function Created() {
 
     function handleSubmit(e) {
         e.preventDefault();
+        if (!input.name) {
+            return alert('Enter game name')
+        }
+        else if (input.name.length > 15) {
+            return alert('Only fifteen characters')
+        }
+        else if (input.rating > 5 || input.rating < 0.1){
+            return alert('Select the rating between five or zero')
+        }
         dispatch(createdGame(input))
         alert("Your game is created!")
         setError(validation(input))
@@ -147,9 +157,9 @@ export default function Created() {
 
     useEffect(() => {
         if (
-            input.name === "" ||
-            input.name.length > 80 ||
-            /[^a-z\s]/.test(input.name) ||
+            // input.name === "" ||
+            // input.name.length > 15 ||
+            // /[^a-z\s]/.test(input.name) ||
             input.genres.length === 0 ||
             input.platform.length === 0 ||
             input.description.length < 180 ||
@@ -157,9 +167,9 @@ export default function Created() {
             input.description.length === 0 ||
             !input.release ||
             input.release > 10 ||
-            input.rating.length < 1 ||
+            input.rating.length === 0 ||
             input.rating.length > 5 ||
-            !/[-a-zA-Z0-9@:%_.~#?&//=]{2,256}\.[a-z]{2,4}\b(\/[-a-zA-Z0-9@:%_.~#?&//=]*)?/gi.test(input.image)
+            !/(https:\/\/)([^\s(["<,>/]*)(\/)[^\s[",><]*(.png|.jpg|.jpeg)(\?[^\s[",><]*)?/gi.test(input.image)
         ) {
             return (setDisabledButton(true));
         } else {
@@ -226,9 +236,9 @@ export default function Created() {
                                 onChange={handleChange}
                                 step="0.1"
                                 min="0"
-                                max="5"
+                                max="6"
                                 className={styles.input}
-                            /><p className={styles.label}>{input.rating}</p> 
+                            /><p className={styles.label}>{input.rating}</p>
                             {error.rating && (<p className={styles.error}>❌{error.rating}</p>)}
                         </div>
                         <div>
@@ -246,10 +256,10 @@ export default function Created() {
                         <div className={styles.content}>
                             <label className={styles.label}>Genre:</label>
                             <select className={styles.select} onChange={(e) => handleSelectG(e)}>
-                                <option value="all" disable>All Genre</option>
-                                {genres?.map((g, id) => (
-                                    <option name={g.name} key={id} value={g.name}>{g.name}</option>
-                                ))}
+                                <option hidden>Select Genre</option>
+                                {genres?.sort().map((g, id) => {
+                                    return <option key={id} value={g.name}>{g.name}</option>
+                                })}
                             </select>
                             {error.genres && (<p className={styles.error}> ❌{error.genres}</p>)}
                         </div>
@@ -264,10 +274,10 @@ export default function Created() {
                         <div>
                             <label className={styles.label}>Platform:</label>
                             <select className={styles.select} onChange={(e) => handleSelectP(e)}>
-                                <option value="all" disable>All Platform</option>
-                                {platform?.map((p, id) => (
-                                    <option name={p.name} key={id} value={p.name}>{p.name}</option>
-                                ))}
+                            <option hidden>Select Platform</option>
+                                {allGames?.map((p, id) => {
+                                    return <option name={p.platform[0]} key={id} value={p.platform[0]}>{p.platform[0]}</option>
+                                })}
                             </select>
                             {error.platform && (<p className={styles.error}> ❌{error.platform}</p>)}
                         </div>
