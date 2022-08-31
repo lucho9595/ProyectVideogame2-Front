@@ -9,12 +9,13 @@ import FilterRating from "../Filters/FilterRating.jsx";
 import FilterCreatedOrApi from "../Filters/FilterCreatedOrApi.jsx";
 import Card from "../Card/Card.jsx";
 import Loading from "../Loading/Loading.jsx"
-import { getVideogames } from "../../Redux/Actions";
+import {getVideogames } from "../../Redux/Actions"; //filterPlatform, filterRelease, getPlatform, 
 import styles from "./Home.module.css";
 
-export default function Home({setName}) {
+export default function Home({ setName }) {
     const dispatch = useDispatch();
     const allVideogames = useSelector((state) => state.videogames)
+    // const platform = useSelector((state) => state.platform)
     const [currentPage, setCurrentPage] = useState(1);
     const [videogamePerPage, setVideogamePerPage] = useState(15);
     const indexLastGame = currentPage * videogamePerPage;
@@ -31,11 +32,29 @@ export default function Home({setName}) {
 
     useEffect(() => {
         dispatch(getVideogames())
+        // dispatch(getPlatform())
     }, [dispatch])
 
-    function handleSubmit(e){
+    function handleSubmit(e) {
+        e.preventDefault();
         dispatch(getVideogames());
+        setTimeout(() => { }, 1000);
+        setCurrentPage(1);
+        setOrderName('');
     }
+
+    // function handlePlatform(e) {
+    //     e.preventDefault();
+    //     dispatch(filterPlatform(e.target.value))
+    //     setCurrentPage(1)
+    // }
+
+    // function handleOrderRelase(e) {
+    //     e.preventDefault()
+    //     dispatch(filterRelease(e.target.value));
+    //     setCurrentPage(1);
+    //     setOrderName(`orderName ${e.target.value}`)
+    // }
 
     return (
         <div className={styles.contain}>
@@ -64,8 +83,24 @@ export default function Home({setName}) {
                     <FilterRating setCurrentPage={setCurrentPage} setOrderName={setOrderName} />
                 </div>
                 <div className={styles.filter}>
-                    <FilterGenre className={styles.filter} setCurrentPage={setCurrentPage} />
+                    <FilterGenre setCurrentPage={setCurrentPage} />
                 </div>
+                {/* <div>
+                    <select onChange={(e) => handlePlatform(e)}>
+                        <option value="all">Type Platform</option>
+                        {platform?.map((p) => {
+                            return <option key={p.id} value={p.name} >{p.name}</option>
+                        })}
+                    </select>
+                </div>
+                <div>
+                    <select onChange={handleOrderRelase}>
+                        <option value="all">Order Release</option>
+                        <option value="1980-01-01">Sort 1980-01-01</option>
+                        <option value='2023-01-03'>2023-01-03</option>
+                    </select>
+
+                </div> */}
             </div>
             <div>
                 <Pagination

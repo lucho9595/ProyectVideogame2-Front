@@ -24,7 +24,6 @@ export default function SearchBar({ setCurrentPage }) {
     !name ? alert("Enter your game"):
     dispatch(getName(name.toLowerCase()))
     setName("")
-    setCurrentPage(1)
     }
 
     return (

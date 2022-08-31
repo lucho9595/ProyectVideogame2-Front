@@ -2,7 +2,7 @@ import React from "react";
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
 import { Link, useHistory } from 'react-router-dom';
-import { getGenres, createdGame, getVideogames } from '../../Redux/Actions.js'; //getPlatform
+import { getGenres, createdGame, getVideogames, getPlatform } from '../../Redux/Actions.js';
 import styles from "./Form.module.css";
 
 export default function Created() {
@@ -10,7 +10,7 @@ export default function Created() {
     const history = useHistory();
     const allGames = useSelector((state) => state.videogames)
     const genres = useSelector((state) => state.genres);
-    // const platform = useSelector((state) => state.platform)
+    const platform = useSelector((state) => state.platform)
     const [error, setError] = useState({});
     const [input, setInput] = useState({
         name: "",
@@ -25,7 +25,7 @@ export default function Created() {
     useEffect(() => {
         dispatch(getGenres())
         dispatch(getVideogames())
-        // dispatch(getPlatform())
+        dispatch(getPlatform())
     }, [dispatch])
 
     //Aca realizamos la validacion:
@@ -66,7 +66,6 @@ export default function Created() {
         if (input.genres.length === 5) {
             alert("You must put maximum 5 types")
         } else {
-
             setInput({
                 ...input,
                 genres: [...new Set([...input.genres, e.target.value])],
@@ -92,7 +91,6 @@ export default function Created() {
     //     }); 
     // }
     // };
-
     function handleSelectP(e) {
         if (input.platform.length === 5) {
             alert("You must put maximum 5 types")
@@ -135,8 +133,8 @@ export default function Created() {
         else if (input.name.length > 15) {
             return alert('Only fifteen characters')
         }
-        else if (input.rating > 5 || input.rating < 0.1){
-            return alert('Select the rating between five or zero')
+        else if (input.rating > 5 || input.rating < 0.1) {
+            return alert('Select the rating between zero or five')
         }
         dispatch(createdGame(input))
         alert("Your game is created!")
@@ -274,9 +272,9 @@ export default function Created() {
                         <div>
                             <label className={styles.label}>Platform:</label>
                             <select className={styles.select} onChange={(e) => handleSelectP(e)}>
-                            <option hidden>Select Platform</option>
-                                {allGames?.map((p, id) => {
-                                    return <option name={p.platform[0]} key={id} value={p.platform[0]}>{p.platform[0]}</option>
+                                <option hidden>Select Platform</option>
+                                {platform?.map((e, id) => {
+                                    return <option key={id} value={e.name}>{e.name}</option>
                                 })}
                             </select>
                             {error.platform && (<p className={styles.error}> ❌{error.platform}</p>)}
