@@ -19,7 +19,7 @@ export const CLEAN_DETAIL = "CLEAN_DETAIL";
 export function getVideogames() {
     return async function (dispatch) {
         try {
-            let videogames = await axios.get('http://localhost:3001/videogame')
+            let videogames = await axios.get('https://appgamess.herokuapp.com/videogame')
             return dispatch({
                 type: GET_VIDEOGAMES,
                 payload: videogames.data
@@ -33,7 +33,7 @@ export function getVideogames() {
 export function getName(payload) {
     return async function (dispatch) {
         try {
-            let nameGames = await axios.get(`http://localhost:3001/videogame?name=${payload}`)
+            let nameGames = await axios.get(`https://appgamess.herokuapp.com/videogame?name=${payload}`)
                 return dispatch({
                     type: GET_NAME,
                     payload: nameGames.data
@@ -47,7 +47,7 @@ export function getName(payload) {
 export function getGenres() {
     return async function (dispatch) {
         try {
-            let genre = await axios.get(`http://localhost:3001/genre`)
+            let genre = await axios.get(`https://appgamess.herokuapp.com/genre`)
             return dispatch({
                 type: GET_GENRES,
                 payload: genre.data
@@ -62,7 +62,7 @@ export function getGenres() {
 export function getDetail(id) {
     return async function (dispatch) {
         try {
-            const details = await axios.get(`http://localhost:3001/videogame/${id}`)
+            const details = await axios.get(`https://appgamess.herokuapp.com/videogame/${id}`)
             console.log(details)
             return dispatch({
                 type: GET_DETAIL,
@@ -77,7 +77,7 @@ export function getDetail(id) {
 export function getPlatform() {
     return async function (dispatch) {
         try {
-            const platform = await axios.get(`http://localhost:3001/platforms`)
+            const platform = await axios.get(`https://appgamess.herokuapp.com/platforms`)
             console.log(platform)
             return dispatch({
                 type: GET_PLATFORM,
@@ -91,7 +91,7 @@ export function getPlatform() {
 
 export function createdGame(payload) {
     return async function () {
-        const created = await axios.post(`http://localhost:3001/videogame`, payload)
+        const created = await axios.post(`https://appgamess.herokuapp.com/videogame`, payload)
         return created
     }
 }
