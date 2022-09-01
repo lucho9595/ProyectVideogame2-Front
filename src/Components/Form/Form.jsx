@@ -105,11 +105,15 @@ export default function Created() {
         setInput({
             ...input,
             genres: input.genres.filter(genre => genre !== el),
+            platform: input.platform.filter(p => p !== el),
+
         });
         setError(
             validation({
                 ...input,
                 genres: input.genres.filter(genre => genre !== el),
+                platform: input.platform.filter(p => p !== el),
+
             })
         )
     };
