@@ -7,15 +7,15 @@ import FilterAlpha from "../Filters/FilterAlpha.jsx";
 import FilterGenre from "../Filters/FilterGenre.jsx";
 import FilterRating from "../Filters/FilterRating.jsx";
 import FilterCreatedOrApi from "../Filters/FilterCreatedOrApi.jsx";
+import FilterPlatform from "../Filters/FilterPlatform.jsx";
 import Card from "../Card/Card.jsx";
 import Loading from "../Loading/Loading.jsx"
-import { getVideogames, filterPlatform, getPlatform } from "../../Redux/Actions";
+import { getVideogames } from "../../Redux/Actions";
 import styles from "./Home.module.css";
 
 export default function Home({ setName }) {
     const dispatch = useDispatch();
     const allVideogames = useSelector((state) => state.videogames)
-    const platform = useSelector((state) => state.platform)
     const [currentPage, setCurrentPage] = useState(1);
     const [videogamePerPage, setVideogamePerPage] = useState(15);
     const indexLastGame = currentPage * videogamePerPage;
@@ -41,12 +41,6 @@ export default function Home({ setName }) {
         setTimeout(() => { }, 1000);
         setCurrentPage(1);
         setOrderName('');
-    }
-
-    function handlePlatform(e) {
-        e.preventDefault();
-        dispatch(filterPlatform(e.target.value))
-        setCurrentPage(1)
     }
 
     return (
@@ -78,13 +72,8 @@ export default function Home({ setName }) {
                 <div className={styles.filter}>
                     <FilterGenre setCurrentPage={setCurrentPage} />
                 </div>
-                <div>
-                    <select onChange={(e) => handlePlatform(e)}>
-                        <option value="all">Type Platform</option>
-                        {platform?.map((p) => {
-                            return <option key={p.id} value={p.name} >{p.name}</option>
-                        })}
-                    </select>
+                <div className={styles.filter}>
+                    <FilterPlatform setCurrentPage={setCurrentPage} />
                 </div>
             </div>
             <div>
