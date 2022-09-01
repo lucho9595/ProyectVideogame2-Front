@@ -2,7 +2,7 @@ import React from "react";
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
 import { Link, useHistory } from 'react-router-dom';
-import { getGenres, createdGame, getVideogames, getPlatform } from '../../Redux/Actions.js';
+import { getGenres, createdGame, getVideogames } from '../../Redux/Actions.js';
 import styles from "./Form.module.css";
 
 export default function Created() {
@@ -10,7 +10,6 @@ export default function Created() {
     const history = useHistory();
     const allGames = useSelector((state) => state.videogames)
     const genres = useSelector((state) => state.genres);
-    const platform = useSelector((state) => state.platform)
     const [error, setError] = useState({});
     const [input, setInput] = useState({
         name: "",
@@ -25,7 +24,6 @@ export default function Created() {
     useEffect(() => {
         dispatch(getGenres())
         dispatch(getVideogames())
-        dispatch(getPlatform())
     }, [dispatch])
 
     //Aca realizamos la validacion:
@@ -39,13 +37,14 @@ export default function Created() {
         if (input.name.length > 15) { errors.name = "Only fifteen characters"; }
         if (input.name === " ") { errors.name = "The first character is not space-bar"; }
         if (!input.name) { errors.name = "Name required"; }
-        if (input.description.length < 180 || input.description.length > 1500) { errors.description = "Minium 180 characters"; }
+        if (input.description.length < 80) { errors.description = "Minium 80 characters"; }
+        if (input.description.length > 255) { errors.description = "Max 255 characters"; }
         if (!Date.parse(input.release)) { errors.release = "Date of release is required"; }
         if (!input.rating) { errors.rating = "Rating is required"; }
         if (input.rating > 5 || input.rating < 0.1) { errors.rating = "Rating must range between 0 and 5"; }
         if (!/^(https:\/\/)([^\s(["<,>/]*)(\/)[^\s[",><]*(.png|.jpg|.jpeg)(\?[^\s[",><]*)?/gi.test(input.image)) { errors.image = "The url is not valid"; }
         if (!input.genres.length) { errors.genres = "Select at least a one or five genres "; }
-        if (!input.platform.length) { errors.platform = " Select at least a one or five platform"; }
+        if (input.platform.length === 0) { errors.platform = "Select one a platform" }
         return errors;
     }
 
@@ -80,32 +79,30 @@ export default function Created() {
         }
     };
 
-    // otra forma que seleccione de a uno
-    // if (Object.values(input.genres).includes(e.target.value)) {
-    //     alert("The genre has already been selected");
-    // } else {
-    //     setInput({
-    //     ...input,
-    //     genres: [...input.genres, e.target.value]
-    //     ,
-    //     }); 
-    // }
-    // };
     function handleSelectP(e) {
-        if (input.platform.length === 5) {
-            alert("You must put maximum 5 types")
-        } else {
+        if (e.target.checked) {
             setInput({
                 ...input,
-                platform: [...new Set([...input.platform, e.target.value])]
-            });
-
+                platform: [...new Set([...input.platform, e.target.value])],
+            })
             setError(
                 validation({
                     ...input,
-                    platform: [...input.platform, e.target.value]
+                    platform: [...input.platform, e.target.value],
                 })
-            );
+            )
+                ;
+        } else if (!e.target.checked) {
+            setInput({
+                ...input,
+                platform: [...input.platform.filter(p => p !== e.target.value)],
+            });
+            setError(
+                validation({
+                    ...input,
+                    platform: [...input.platform.filter(p => p !== e.target.value)],
+                })
+            )
         }
     };
 
@@ -114,13 +111,11 @@ export default function Created() {
         setInput({
             ...input,
             genres: input.genres.filter(genre => genre !== el),
-            platform: input.platform.filter(platform => platform !== el)
         });
         setError(
             validation({
                 ...input,
                 genres: input.genres.filter(genre => genre !== el),
-                platform: input.platform.filter(platform => platform !== el)
             })
         )
     };
@@ -271,21 +266,30 @@ export default function Created() {
                         </div>
                         <div>
                             <label className={styles.label}>Platform:</label>
-                            <select className={styles.select} onChange={(e) => handleSelectP(e)}>
-                                <option hidden>Select Platform</option>
-                                {platform?.map((e, id) => {
-                                    return <option key={id} value={e.name}>{e.name}</option>
-                                })}
-                            </select>
+                            <input value="PlayStation" type="checkbox" onChange={handleSelectP} /><label>PlayStation</label>
+                            <input value="PlayStation 2" type="checkbox" onChange={handleSelectP} /><label>PlayStation 2</label>
+                            <input value="PlayStation 3" type="checkbox" onChange={handleSelectP} /><label>PlayStation 3</label>
+                            <input value="PlayStation 4" type="checkbox" onChange={handleSelectP} /><label>PlayStation 4</label>
+                            <input value="PlayStation 5" type="checkbox" onChange={handleSelectP} /><label>PlayStation 5</label>
+                            <input value="Xbox One" type="checkbox" onChange={handleSelectP} /><label>Xbox One</label>
+                            <input value="Pc" type="checkbox" onChange={handleSelectP} /><label>Pc</label>
+                            <input value="Xbox Series S/X" type="checkbox" onChange={handleSelectP} /><label>Xbox Series S/X</label>
+                            <input value="Nintendo Switch" type="checkbox" onChange={handleSelectP} /><label>Nintendo Switch</label>
+                            <input value="Android" type="checkbox" onChange={handleSelectP} /><label>Android</label>
+                            <input value="iOS" type="checkbox" onChange={handleSelectP} /><label>iOS</label>
+                            <input value="Nintendo 3DS" type="checkbox" onChange={handleSelectP} /><label>Nintendo 3DS</label>
+                            <input value="Nintendo DS" type="checkbox" onChange={handleSelectP} /><label>Nintendo DS</label>
+                            <input value="Nintendo DSi" type="checkbox" onChange={handleSelectP} /><label>Nintendo DSi</label>
+                            <input value="macOS" type="checkbox" onChange={handleSelectP} /><label>macOS</label>
+                            <input value="Linux" type="checkbox" onChange={handleSelectP} /><label>Linux</label>
+                            <input value="Xbox 360" type="checkbox" onChange={handleSelectP} /><label>Xbox 360</label>
+                            <input value="Xbox" type="checkbox" onChange={handleSelectP} /><label>Xbox</label>
+                            <input value="PS Vita" type="checkbox" onChange={handleSelectP} /><label>PS Vita</label>
+                            <input value="PSP" type="checkbox" onChange={handleSelectP} /><label>PSP</label>
+                            <input value="Wii U" type="checkbox" onChange={handleSelectP} /><label>Wii U</label>
+                            <input value="GameCube" type="checkbox" onChange={handleSelectP} /><label>GameCube</label>
+                            <input value="Game Boy" type="checkbox" onChange={handleSelectP} /><label>Game Boy</label>
                             {error.platform && (<p className={styles.error}> ❌{error.platform}</p>)}
-                        </div>
-                        <div className={styles.divContain}>
-                            {input.platform.map((p, id) =>
-                                <div key={id} className={styles.divInfo}>
-                                    <p className={styles.p}>{p}</p>
-                                    <button className={styles.buttonP} onClick={(e) => handleDelete(e, p)}>X</button>
-                                </div>
-                            )}
                         </div>
                         <button disabled={disabledButton} type='submit' className={styles.submit}>Created Videogame</button>
                     </form>

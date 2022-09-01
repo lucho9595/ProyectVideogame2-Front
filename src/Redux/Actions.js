@@ -4,7 +4,7 @@ export const GET_VIDEOGAMES = "GET_VIDEOGAMES";
 export const GET_NAME = "GET_NAME";
 export const GET_GENRES = "GET_GENRES";
 export const GET_DETAIL = "GET_DETAIL";
-export const GET_PLATFORM = "GET_PLATFORM";
+// export const GET_PLATFORM = "GET_PLATFORM";
 export const FILTER_GENRE = "FILTER_GENRE";
 export const FILTER_CREATED_OR_API = "FILTER_CREATED_OR_API";
 export const FILTER_ALPHA = "FILTER_ALPHA";
@@ -74,20 +74,20 @@ export function getDetail(id) {
     }
 };
 
-export function getPlatform() {
-    return async function (dispatch) {
-        try {
-            const platform = await axios.get(`https://appgamess.herokuapp.com/platforms`)
-            console.log(platform)
-            return dispatch({
-                type: GET_PLATFORM,
-                payload: platform.data,
-            })
-        } catch (error) {
-            console.log(error)
-        }
-    }
-}
+// export function getPlatform() {
+//     return async function (dispatch) {
+//         try {
+//             const platform = await axios.get(`https://appgamess.herokuapp.com/platforms`)
+//             console.log(platform)
+//             return dispatch({
+//                 type: GET_PLATFORM,
+//                 payload: platform.data,
+//             })
+//         } catch (error) {
+//             console.log(error)
+//         }
+//     }
+// }
 
 export function createdGame(payload) {
     return async function () {

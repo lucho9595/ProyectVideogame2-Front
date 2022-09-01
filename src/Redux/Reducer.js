@@ -3,7 +3,7 @@ import {
     GET_NAME,
     GET_GENRES,
     GET_DETAIL,
-    GET_PLATFORM,
+    // GET_PLATFORM,
     FILTER_GENRE,
     FILTER_CREATED_OR_API,
     FILTER_ALPHA,
@@ -50,11 +50,11 @@ const rootReducer = (state = initialState, action) => {
                 ...state,
                 detail: action.payload
             }
-        case GET_PLATFORM:
-            return {
-                ...state,
-                platform: action.payload,
-            }
+        // case GET_PLATFORM:
+        //     return {
+        //         ...state,
+        //         platform: action.payload,
+        //     }
         //filtro por nombre para ordenar alfabeticamente
         case FILTER_ALPHA:
             let sortedVideogameName = action.payload === "A-Z" ? state.videogames.sort((a, b) => {
