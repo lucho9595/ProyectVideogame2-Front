@@ -1,4 +1,4 @@
-import React, {useState } from "react";
+import React from "react";
 import { useDispatch} from "react-redux";
 import { filterAlphabet } from "../../Redux/Actions.js";
 import styles from "./FilterAlpha.module.css";
