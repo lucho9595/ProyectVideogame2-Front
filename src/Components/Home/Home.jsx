@@ -32,7 +32,6 @@ export default function Home({ setName }) {
 
     useEffect(() => {
         dispatch(getVideogames())
-        dispatch(getPlatform())
     }, [dispatch])
 
     function handleSubmit(e) {
