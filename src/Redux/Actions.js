@@ -4,13 +4,12 @@ export const GET_VIDEOGAMES = "GET_VIDEOGAMES";
 export const GET_NAME = "GET_NAME";
 export const GET_GENRES = "GET_GENRES";
 export const GET_DETAIL = "GET_DETAIL";
-// export const GET_PLATFORM = "GET_PLATFORM";
+export const GET_PLATFORM = "GET_PLATFORM";
 export const FILTER_GENRE = "FILTER_GENRE";
 export const FILTER_CREATED_OR_API = "FILTER_CREATED_OR_API";
 export const FILTER_ALPHA = "FILTER_ALPHA";
 export const FILTER_RATING = "FILTER_RATING";
-// export const FILTER_PLATFORM = "FILTER_PLATFORM";
-// export const FILTER_RELEASE = "FILTER_RELEASE";
+export const FILTER_PLATFORM = "FILTER_PLATFORM";
 export const POST_GAME = "POST_GAME";
 export const CLEAN_DETAIL = "CLEAN_DETAIL";
 
@@ -74,20 +73,20 @@ export function getDetail(id) {
     }
 };
 
-// export function getPlatform() {
-//     return async function (dispatch) {
-//         try {
-//             const platform = await axios.get(`https://appgamess.herokuapp.com/platforms`)
-//             console.log(platform)
-//             return dispatch({
-//                 type: GET_PLATFORM,
-//                 payload: platform.data,
-//             })
-//         } catch (error) {
-//             console.log(error)
-//         }
-//     }
-// }
+export function getPlatform() {
+    return async function (dispatch) {
+        try {
+            const platform = await axios.get(`https://appgamess.herokuapp.com/platforms`)
+            console.log(platform)
+            return dispatch({
+                type: GET_PLATFORM,
+                payload: platform.data,
+            })
+        } catch (error) {
+            console.log(error)
+        }
+    }
+}
 
 export function createdGame(payload) {
     return async function () {
@@ -126,19 +125,12 @@ export function filterRating(payload) {
     }
 }
 
-// export function filterPlatform(payload){
-//     return{
-//         type: FILTER_PLATFORM,
-//         payload,
-//     }
-// }
-
-// export function filterRelease(payload){
-//     return{
-//         type: FILTER_RELEASE,
-//         payload
-//     }
-// }
+export function filterPlatform(payload){
+    return{
+        type: FILTER_PLATFORM,
+        payload,
+    }
+}
 
 //Limpio el detalle
 

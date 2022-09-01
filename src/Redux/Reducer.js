@@ -3,13 +3,12 @@ import {
     GET_NAME,
     GET_GENRES,
     GET_DETAIL,
-    // GET_PLATFORM,
+    GET_PLATFORM,
     FILTER_GENRE,
     FILTER_CREATED_OR_API,
     FILTER_ALPHA,
     FILTER_RATING,    
-    // FILTER_RELEASE,
-    // FILTER_PLATFORM,
+    FILTER_PLATFORM,
     POST_GAME,
     CLEAN_DETAIL,
 
@@ -50,11 +49,11 @@ const rootReducer = (state = initialState, action) => {
                 ...state,
                 detail: action.payload
             }
-        // case GET_PLATFORM:
-        //     return {
-        //         ...state,
-        //         platform: action.payload,
-        //     }
+        case GET_PLATFORM:
+            return {
+                ...state,
+                platform: action.payload,
+            }
         //filtro por nombre para ordenar alfabeticamente
         case FILTER_ALPHA:
             let sortedVideogameName = action.payload === "A-Z" ? state.videogames.sort((a, b) => {
@@ -101,28 +100,14 @@ const rootReducer = (state = initialState, action) => {
                 ...state,
                 videogames: videogameRating
             }
-        // case FILTER_PLATFORM:
-        //     const allPlatform = state.backUpVideogame;
-        //     const filterP = action.payload === "all" ? allPlatform : allPlatform.filter((p) => p.platform.includes(action.payload))
-        //     console.log(filterP)
-        //     return {
-        //         ...state,
-        //         videogames: filterP.length > 0 ? filterP : (alert("There ir not game with that platform"), [...state.videogames])
-        //     }
-        // case FILTER_RELEASE:
-        //     const filterR = action.payload === "1980-01-01" ? state.videogames.sort((a, b) => {
-        //         if (a.release > b.release) return 1
-        //         if (a.release < b.release) return -1
-        //         return 0
-        //     }) : state.videogames.sort((a, b) => {
-        //         if (a.release > b.release) return -1
-        //         if (a.release < b.release) return 1
-        //         return 0
-        //     })
-        //     return {
-        //         ...state,
-        //         videogames: filterR
-        //     }
+        case FILTER_PLATFORM:
+            const allPlatform = state.backUpVideogame;
+            const filterP = action.payload === "all" ? allPlatform : allPlatform.filter((p) => p.platform.includes(action.payload))
+            console.log(filterP)
+            return {
+                ...state,
+                videogames: filterP.length > 0 ? filterP : (alert("There ir not game with that platform"), [...state.videogames])
+            }
         case POST_GAME:
             return {
                 ...state
